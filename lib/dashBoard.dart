@@ -120,7 +120,9 @@ class dashBoard extends StatelessWidget {
                   ),
                   child: Center(
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, '/notes');
+                      },
                       child: const Text(
                         "Notes",
                         style: TextStyle(
@@ -143,7 +145,9 @@ class dashBoard extends StatelessWidget {
                   ),
                   child: Center(
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, '/history');
+                      },
                       child: const Text(
                         "History",
                         style: TextStyle(

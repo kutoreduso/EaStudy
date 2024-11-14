@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class AddQuestionsScreen extends StatelessWidget {
-  final String quizName;
+class Notes extends StatelessWidget {
+  final String addnotes;
 
-  AddQuestionsScreen({required this.quizName});
+  Notes({required this.addnotes});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class AddQuestionsScreen extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
-            Navigator.pushNamed(context, '/quizzes');
+            Navigator.pushNamed(context, '/dashboard');
           },
         ),
         actions: [
@@ -23,7 +23,7 @@ class AddQuestionsScreen extends StatelessWidget {
           ),
         ],
         title: Text(
-          quizName,
+          addnotes,
           style: TextStyle(
             color: Colors.white,
             fontSize: 40,
