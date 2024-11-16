@@ -148,8 +148,194 @@ class IdentificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Identification')),
-      body: Center(child: Text('Welcome to the Identification Page')),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context); // Go back to the previous screen
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.menu, color: Colors.white),
+            onPressed: () {
+              // Handle menu button press
+            },
+          ),
+        ],
+      ),
+      body: Stack(
+        children: [
+          // Background Circles
+          Align(
+            alignment: const Alignment(-2.20, 1.35),
+            child: Container(
+              width: 230,
+              height: 230,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xFFC0B283),
+              ),
+            ),
+          ),
+          Align(
+            alignment: const Alignment(-1.05, -1.60),
+            child: Container(
+              width: 250,
+              height: 250,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xFFC0B283),
+              ),
+            ),
+          ),
+          Align(
+            alignment: const Alignment(1.75, -1.20),
+            child: Container(
+              width: 250,
+              height: 250,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xFFC0B283),
+              ),
+            ),
+          ),
+          Align(
+            alignment: const Alignment(1.25, -1.50),
+            child: Container(
+              width: 250,
+              height: 250,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xFF404A42),
+              ),
+            ),
+          ),
+
+          // Title Section
+          Positioned(
+            top: 40,
+            left: 16,
+            right: 16,
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Color(0xFFE8D9CB),
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: const Center(
+                child: Text(
+                  'Identification',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          // Main Content
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 80.0),
+            child: Column(
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 400,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE8D9CB),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Question Input Field
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: 'Question',
+                            labelStyle: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 16,
+                            ),
+                            hintText: 'Type your question here',
+                            hintStyle: TextStyle(
+                              color: Colors.grey.shade400,
+                            ),
+                            border: const UnderlineInputBorder(),
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                            enabledBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 154, 154, 154),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+
+                        // Enumeration Answer Input Fields
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: 'Answer 1',
+                            labelStyle: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 16,
+                            ),
+                            hintText: 'Type the correct answer',
+                            hintStyle: TextStyle(
+                              color: Colors.grey.shade400,
+                            ),
+                            border: const UnderlineInputBorder(),
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                            enabledBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 154, 154, 154),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // Save Button
+          Positioned(
+            bottom: 20,
+            right: 20,
+            child: ElevatedButton(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Saved!')),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(15),
+                backgroundColor: const Color(0xFFE8D9CB),
+                shape: const CircleBorder(),
+              ),
+              child: const Icon(
+                Icons.save,
+                color: Colors.black,
+                size: 45,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
