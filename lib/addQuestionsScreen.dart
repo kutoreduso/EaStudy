@@ -534,171 +534,224 @@ class _MultipleChoiceState extends State<MultipleChoice> {
   }
 }
 
-class TrueOrFalsePage extends StatelessWidget {
+class TrueOrFalsePage extends StatefulWidget {
+  @override
+  _TrueFalseQuestionState createState() => _TrueFalseQuestionState();
+}
+
+class _TrueFalseQuestionState extends State<TrueOrFalsePage> {
+  bool isTrueSelected = false;
+  bool isFalseSelected = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pushNamed(context, '/quizzes');
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.menu, color: Colors.white),
+            onPressed: () {
+              // Handle menu button press
+            },
+          ),
+        ],
       ),
-      body: Stack(alignment: Alignment.center, children: [
-        // First circle
-        Align(
-          alignment: Alignment(-2.20, 1.35), // Adjusted alignment
-          child: Container(
-            width: 230,
-            height: 230,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Color(0xFFC0B283),
+      body: Stack(
+        children: [
+          // Background Circles
+          Align(
+            alignment: const Alignment(-2.20, 1.35),
+            child: Container(
+              width: 230,
+              height: 230,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xFFC0B283),
+              ),
             ),
           ),
-        ),
-        // Second circle
-        Align(
-          alignment: Alignment(-1.05, -1.60), // Adjusted alignment
-          child: Container(
-            width: 250,
-            height: 250,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Color(0xFFC0B283),
+          Align(
+            alignment: const Alignment(-1.05, -1.60),
+            child: Container(
+              width: 250,
+              height: 250,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xFFC0B283),
+              ),
             ),
           ),
-        ),
-        // Third circle
-        Align(
-          alignment: Alignment(1.75, -1.20), // Adjusted alignment
-          child: Container(
-            width: 250,
-            height: 250,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Color(0xFFC0B283),
+          Align(
+            alignment: const Alignment(1.75, -1.20),
+            child: Container(
+              width: 250,
+              height: 250,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xFFC0B283),
+              ),
             ),
           ),
-        ),
-        // Fourth circle with a darker color
-        Align(
-          alignment: Alignment(1.25, -1.50), // Adjusted alignment
-          child: Container(
-            width: 250,
-            height: 250,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Color(0xFF404A42),
+          Align(
+            alignment: const Alignment(1.25, -1.50),
+            child: Container(
+              width: 250,
+              height: 250,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xFF404A42),
+              ),
             ),
           ),
-        ),
-        // Content inside Padding
-        Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // Container Box for content
-              Container(
-                height: 55,
-                decoration: BoxDecoration(
-                  color: Color(0xFFE8D9CB),
-                  borderRadius: BorderRadius.circular(20),
+
+          // Title Section
+          Positioned(
+            top: 40, // Adjust position as needed
+            left: 16,
+            right: 16,
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Color(0xFFE8D9CB),
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: const Center(
+                child: Text(
+                  'True or False',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
                 ),
-                // Text content
-                child: Center(
-                  child: Text(
-                    'True or False',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          // Main Content
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                const Spacer(), // Pushes the content downward
+                Container(
+                  width: double.infinity,
+                  height: 400,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE8D9CB),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: TextField(
+                            decoration: InputDecoration(
+                              labelText: 'Question',
+                              labelStyle: const TextStyle(
+                                  color: Colors.grey, fontSize: 16),
+                              hintText: 'Type your question here',
+                              hintStyle: TextStyle(color: Colors.grey.shade400),
+                              border: const UnderlineInputBorder(),
+                              focusedBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color.fromARGB(255, 0, 0, 0)),
+                              ),
+                              enabledBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color.fromARGB(255, 154, 154, 154)),
+                              ),
+                            ),
+                          ),
+                        ),
+                        // True/False Checkbox Section
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Row(
+                            children: [
+                              Row(
+                                children: [
+                                  Checkbox(
+                                    value: isTrueSelected,
+                                    onChanged: (bool? value) {
+                                      if (value == null) return;
+                                      if (!mounted) return;
+                                      setState(() {
+                                        isTrueSelected = value;
+                                        isFalseSelected = !value;
+                                      });
+                                    },
+                                  ),
+                                  const Text('True'),
+                                ],
+                              ),
+                              const SizedBox(width: 20),
+                              Row(
+                                children: [
+                                  Checkbox(
+                                    value: isFalseSelected,
+                                    onChanged: (bool? value) {
+                                      if (value == null) return;
+                                      if (!mounted) return;
+                                      setState(() {
+                                        isFalseSelected = value;
+                                        isTrueSelected = !value;
+                                      });
+                                    },
+                                  ),
+                                  const Text('False'),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              ),
-            ],
+                const Spacer(
+                    flex: 2), // Add more spacing below the content if necessary
+              ],
+            ),
           ),
-        ),
-        SizedBox(height: 55),
 
-        // Positioned widget for moving the bottom content lower
-        Positioned(
-            top:
-                80, // This controls how far from the bottom the content will be
-            left: 0,
-            right: 0,
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 7.0),
-              child:
-                  // Container Box for content
-                  Container(
-                width: 50, // Adjust the width to your preference
-                height: 300,
-                decoration: BoxDecoration(
-                  color: Color(0xFFE8D9CB),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                // Text content
-                child: Center(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        // Ensures the TextField takes up available space
-                        child: Column(
-                          crossAxisAlignment:
-                              CrossAxisAlignment.start, // Align to the top-left
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(
-                                  16.0), // Optional padding for spacing
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  labelText:
-                                      'Question', // Add a label for the question field
-                                  labelStyle: TextStyle(
-                                    color: Colors
-                                        .grey, // Customize the label text style
-                                    fontSize: 16,
-                                  ),
-                                  hintText:
-                                      'Type your question here', // Add a hint for the field
-                                  hintStyle: TextStyle(
-                                    color:
-                                        Colors.grey.shade400, // Hint text color
-                                  ),
-                                  border:
-                                      UnderlineInputBorder(), // Default underlined border
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors
-                                          .blue, // Underline color when focused
-                                    ),
-                                  ),
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors
-                                          .grey, // Underline color when not focused
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+          // Save Button
+          Positioned(
+            bottom: 20, // Adjust distance from the bottom
+            right: 20, // Adjust distance from the right
+            child: ElevatedButton(
+              onPressed: () {
+                // Save logic goes here
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Saved!')),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(15),
+                backgroundColor: Color(0xFFE8D9CB),
+                shape: const CircleBorder(), // Makes the button circular
               ),
-            ))
-      ]),
+              child: const Icon(
+                Icons.save, // Save icon
+                color: Colors.black,
+                size: 45, // Adjust icon size
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: AddQuestionsScreen(quizName: "Sample Quiz"), // Pass quiz name here
-  ));
 }
