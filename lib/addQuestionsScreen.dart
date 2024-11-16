@@ -158,162 +158,261 @@ class EnumerationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Enumeration')),
-        body: Scaffold(
-            body: SafeArea(
-                child: Stack(
-          children: [
-            // Background gradient
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xFFD7C7A5), Color(0xFFA09785)],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pushNamed(context, '/quizzes');
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.menu, color: Colors.white),
+            onPressed: () {
+              // Handle menu button press
+            },
+          ),
+        ],
+      ),
+      body: Stack(
+        children: [
+          // Background Circles
+          Align(
+            alignment: const Alignment(-2.20, 1.35),
+            child: Container(
+              width: 230,
+              height: 230,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xFFC0B283),
               ),
             ),
-            // Overlapping circle patterns
-            Positioned(
-              top: -100,
-              left: -80,
-              child: CircleAvatar(
-                radius: 150,
-                backgroundColor: Color(0xFFA09785),
+          ),
+          Align(
+            alignment: const Alignment(-1.05, -1.60),
+            child: Container(
+              width: 250,
+              height: 250,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xFFC0B283),
               ),
             ),
-            Positioned(
-              top: 50,
-              right: -80,
-              child: CircleAvatar(
-                radius: 120,
-                backgroundColor: Color(0xFF6C6959),
+          ),
+          Align(
+            alignment: const Alignment(1.75, -1.20),
+            child: Container(
+              width: 250,
+              height: 250,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xFFC0B283),
               ),
             ),
-            Positioned(
-              bottom: -120,
-              left: -60,
-              child: CircleAvatar(
-                radius: 180,
-                backgroundColor: Color(0xFF6C6959),
+          ),
+          Align(
+            alignment: const Alignment(1.25, -1.50),
+            child: Container(
+              width: 250,
+              height: 250,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xFF404A42),
               ),
             ),
-            Positioned(
-              bottom: 100,
-              right: -100,
-              child: CircleAvatar(
-                radius: 130,
-                backgroundColor: Color(0xFFA09785),
+          ),
+
+          // Title Section
+          Positioned(
+            top: 40, // Adjust position as needed
+            left: 16,
+            right: 16,
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Color(0xFFE8D9CB),
+                borderRadius: BorderRadius.all(Radius.circular(20)),
               ),
-            ),
-            // Main content with question and answers
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // Top Navigation Bar
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 12.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Icon(Icons.arrow_back, color: Colors.black),
-                      Icon(Icons.menu, color: Colors.black),
-                    ],
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: const Center(
+                child: Text(
+                  'Enumeration',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
                   ),
                 ),
-                // Title
-                Center(
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                const Spacer(), // Pushes the content downward
+                Container(
+                  width: double.infinity,
+                  height: 400,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE8D9CB),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 90.0, vertical: 8.0),
-                    child: Text(
-                      'MULTIPLE CHOICE',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Question Input Field
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: 'Question',
+                            labelStyle: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 16,
+                            ),
+                            hintText: 'Type your question here',
+                            hintStyle: TextStyle(
+                              color: Colors.grey.shade400,
+                            ),
+                            border: const UnderlineInputBorder(),
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                            enabledBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 154, 154, 154),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+
+                        // Enumeration Answer Input Field
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: 'Answer',
+                            labelStyle: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 16,
+                            ),
+                            hintText: 'Type the correct answer',
+                            hintStyle: TextStyle(
+                              color: Colors.grey.shade400,
+                            ),
+                            border: const UnderlineInputBorder(),
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                            enabledBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 154, 154, 154),
+                              ),
+                            ),
+                          ),
+                        ),
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: 'Answer',
+                            labelStyle: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 16,
+                            ),
+                            hintText: 'Type the correct answer',
+                            hintStyle: TextStyle(
+                              color: Colors.grey.shade400,
+                            ),
+                            border: const UnderlineInputBorder(),
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                            enabledBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 154, 154, 154),
+                              ),
+                            ),
+                          ),
+                        ),
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: 'Answer',
+                            labelStyle: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 16,
+                            ),
+                            hintText: 'Type the correct answer',
+                            hintStyle: TextStyle(
+                              color: Colors.grey.shade400,
+                            ),
+                            border: const UnderlineInputBorder(),
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                            enabledBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 154, 154, 154),
+                              ),
+                            ),
+                          ),
+                        ),
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: 'Answer',
+                            labelStyle: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 16,
+                            ),
+                            hintText: 'Type the correct answer',
+                            hintStyle: TextStyle(
+                              color: Colors.grey.shade400,
+                            ),
+                            border: const UnderlineInputBorder(),
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                            enabledBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 154, 154, 154),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                // Question and Answer List
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      // Question Input Field
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Color(0xFFE8D9CB),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: TextField(
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 16.0, vertical: 16.0),
-                            border: InputBorder.none,
-                            hintText: "Enter your question here",
-                            hintStyle: TextStyle(
-                              color: Colors.grey[700],
-                              fontSize: 18,
-                            ),
-                          ),
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 25),
-                      // Answer Input Fields
-                      for (int i = 1; i <= 4; i++)
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 16.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Color(0xFFE8D9CB),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 16.0, vertical: 16.0),
-                                border: InputBorder.none,
-                                hintText: "Answer $i",
-                                hintStyle: TextStyle(
-                                  color: Colors.grey[700],
-                                  fontSize: 18,
-                                ),
-                              ),
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                              ),
-                            ),
-                          ),
-                        ),
-                      Spacer(),
-                      // Save Icon Button at Bottom Right
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Icon(
-                            Icons.save_alt,
-                            color: Colors.black,
-                            size: 30,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                const Spacer(),
               ],
             ),
-          ],
-        ))));
+          ),
+
+          // Save Button
+          Positioned(
+            bottom: 20, // Adjust distance from the bottom
+            right: 20, // Adjust distance from the right
+            child: ElevatedButton(
+              onPressed: () {
+                // Save logic goes here
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Saved!')),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(15),
+                backgroundColor: const Color(0xFFE8D9CB),
+                shape: const CircleBorder(), // Makes the button circular
+              ),
+              child: const Icon(
+                Icons.save, // Save icon
+                color: Colors.black,
+                size: 45, // Adjust icon size
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
